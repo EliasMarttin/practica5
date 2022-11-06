@@ -5,14 +5,13 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.Scanner;
 
 /**
  * Esta clase es una adaptación del ejemplo Hello en RMI del libro de M. L. Liu.
  * Se a eliminado el gestor de seguridad puesto que su uso ha quedado obsoleto.
  */
 
-public class HelloServer {
+public class ServidorViajeRMI {
     public static void main(String args[]) {
 
         try {
@@ -21,16 +20,16 @@ public class HelloServer {
 
             startRegistry(RMIPortNum);
 
-            HelloImpl exportedObj = new HelloImpl();
-            String registryURL = "rmi://localhost:" + RMIPortNum + "/hello";
-            Naming.rebind(registryURL, exportedObj);
+            ImplServidorViajes viajes = new ImplServidorViajes();
+            String registryURL = "rmi://localhost:" + RMIPortNum + "/viaje";
+            Naming.rebind(registryURL, viajes);
             System.out.println("Server registered. Registry contains:");
             // list names currently in the registry
             listRegistry(registryURL);
-            System.out.println("Hello Server ready.");
+            System.out.println("Server ready.");
         }// end try
         catch (Exception re) {
-            System.out.println("Exception in HelloServer.main: " + re);
+            System.out.println("Exception in viajeServer.main: " + re);
         } // end catch
     } // end main
 
